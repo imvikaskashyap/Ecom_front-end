@@ -1,0 +1,13 @@
+.product_img {
+  width: 450px;
+  padding-right: 50px;
+}
+
+.product_img div {
+  box-shadow: 0px 1px 5px black;
+  border-radius: 10px;
+}
+
+.product_img div img {
+  width: 100%;
+}
