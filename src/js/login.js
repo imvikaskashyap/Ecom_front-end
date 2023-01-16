@@ -28,6 +28,29 @@ showLoginBtn.addEventListener("click", () => {
   loginForm.classList.remove("d-none");
 });
 
+function createCart() {
+  const userId = localStorage.getItem("userId");
+  const token = localStorage.getItem("token");
+  console.log(userId, token, "33");
+  const headers = {
+    "Content-Type": "application/json",
+    "Authorization": `Bearer ${token}`,
+  };
+  fetch(BASE_URL + "/carts", {
+    method: "POST",
+    headers: headers,
+    body: JSON.stringify({ userId }),
+  })
+    .then(response => response.json())
+    .then(data => {
+      localStorage.setItem("cartId", data.id);
+      window.location.href = "index.html";
+    })
+    .catch(error => {
+      console.error("Error:", error);
+    });
+}
+
 signupBtn.addEventListener("click", () => {
   if (signupUsername.value == "") {
     updateAuthErrorMsg("Username should not be empty");
@@ -47,12 +70,12 @@ signupBtn.addEventListener("click", () => {
       },
       body: JSON.stringify(data),
     })
-      .then((response) => response.json())
-      .then((data) => {
+      .then(response => response.json())
+      .then(data => {
         // console.log(data);
         updateSuccessMsg(data.message);
       })
-      .catch((error) => {
+      .catch(error => {
         console.log(error);
       });
   }
@@ -65,9 +88,8 @@ loginBtn.addEventListener("click", () => {
     updateAuthErrorMsg("Password should not be empty");
   } else {
     const data = {
-      username: signupUsername.value,
-      password: signupPassword.value,
-      email: signupEmail.value,
+      username: loginUsername.value,
+      password: loginPassword.value,
     };
 
     fetch(BASE_URL + "/auth/signin", {
@@ -77,17 +99,18 @@ loginBtn.addEventListener("click", () => {
       },
       body: JSON.stringify(data),
     })
-      .then((response) => response.json())
-      .then((data) => {
+      .then(response => response.json())
+      .then(data => {
         console.log(data);
         if (data.accessToken) {
           localStorage.setItem("username", data.username);
           localStorage.setItem("userId", data.id);
           localStorage.setItem("token", data.accessToken);
           localStorage.setItem("email", data.email);
+          createCart();
         }
       })
-      .catch((error) => {
+      .catch(error => {
         console.log(error);
       });
   }

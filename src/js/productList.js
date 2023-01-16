@@ -4,33 +4,14 @@ const minPrice = document.getElementById("minPrice");
 const maxPrice = document.getElementById("maxPrice");
 const productList = document.getElementById("productList");
 const clear = document.getElementById("clear");
-const userIntro = document.getElementById("userIntro");
-const logoutBtn = document.getElementById("logoutBtn");
 
 // Event Listeners
 
-searchInput.addEventListener("keyup", () => {
-  const data = {
-    name: searchInput.value,
-    minCost: minPrice.value,
-    maxCost: maxPrice.value,
-  };
-
-  let URI = "/products?";
-  fetch(BASE_URL + URI + new URLSearchParams(data))
-    .then((res) => res.json())
-    .then((data) => renderProducts(data));
-});
-
-clear.addEventListener("click", () => {
-  window.location.reload();
-});
-
 function loadCategories() {
   fetch(`${BASE_URL}/categories`)
-    .then((res) => res.json())
-    .then((data) => renderCategories(data))
-    .catch((error) => {
+    .then(res => res.json())
+    .then(data => renderCategories(data))
+    .catch(error => {
       console.log(error);
     });
 }
@@ -50,9 +31,9 @@ function loadProducts() {
   }
 
   fetch(`${BASE_URL}${URI}`)
-    .then((res) => res.json())
-    .then((data) => renderProducts(data))
-    .catch((err) => console.log(err));
+    .then(res => res.json())
+    .then(data => renderProducts(data))
+    .catch(err => console.log(err));
 }
 
 function renderCategories(categories) {
@@ -92,6 +73,23 @@ function renderProducts(products) {
 
   productList.innerHTML = productListHtml;
 }
+
+searchInput.addEventListener("keyup", () => {
+  const data = {
+    name: searchInput.value,
+    minCost: minPrice.value,
+    maxCost: maxPrice.value,
+  };
+
+  let URI = "/products?";
+  fetch(BASE_URL + URI + new URLSearchParams(data))
+    .then(res => res.json())
+    .then(data => renderProducts(data));
+});
+
+clear.addEventListener("click", () => {
+  window.location.reload();
+});
 
 loadCategories();
 loadProducts();
