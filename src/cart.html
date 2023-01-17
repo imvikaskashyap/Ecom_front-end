@@ -20,10 +20,10 @@
         <div class="container">
           <div class="row">
             <div class="header-wrapper d-flex justify-content-between">
-              <div class="logo">
+              <div class="logo d-flex flex-row">
                 <a class="text-decoration-none" href="index.html">Ecommerce</a>
               </div>
-              <div class="user-actions d-flex">
+              <div class="user-actions d-flex flex-row">
                 <a class="text-decoration-none" href="cart.html">Cart</a>
                 <div class="user-intro" id="userIntro">Hi User</div>
                 <div class="logout-btn" id="logoutBtn">Logout</div>
@@ -35,25 +35,26 @@
 
       <div class="container">
         <div class="row">
-          <div class="cart_title">My Cart</div>
-          <div class="cart_wrapper d-flex">
+          <div class="cart-title">My Cart</div>
+          <div class="cart-wrapper d-flex flex-row">
             <div
-              class="oreder_details d-flex flex-column"
+              class="oreder-details d-flex flex-column"
               id="orderDetails"
             ></div>
-            <div class="price_details d-flex flex-column">
-              <div class="price_details_box" id="priceDetails"></div>
+            <div class="price-details d-flex flex-column">
+              <div class="price-details-box" id="priceDetails"></div>
+
+              <a
+                class="continue-shopping-btn btn btn-info text-decoration-none"
+                href="index.html"
+                >Contiue Shopping</a
+              >
+              <a
+                class="check-out-btn btn btn-primary text-decoration-none"
+                href="checkout.html"
+                >CheckOut</a
+              >
             </div>
-            <a
-              class="continue_shopping_btn btn btn-info text-decoration-none"
-              href="index.html"
-              >Contiue Shopping</a
-            >
-            <a
-              class="checkOut_btn mx-3 btn btn-primary text-decoration-none"
-              href="checkout.html"
-              >CheckOut</a
-            >
           </div>
         </div>
       </div>
